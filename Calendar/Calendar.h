@@ -6,7 +6,6 @@ class Calendar{
     int m_month, m_year, m_day;
 
   public:
-    Calendar();
     Calendar(int month, int day, int year);
     void incrementDay();
     void printDate();
