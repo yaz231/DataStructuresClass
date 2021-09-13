@@ -8,7 +8,7 @@ int main()
   // Clock c;
   // cout << "Hello World" << endl;
   // Clock test;
-  Clock test(1, 2);
+  Clock test(13, 25);
   // cout << test.getHour() << endl;
   // cout << test2.getHour() << endl;
   test.printStandardTime();

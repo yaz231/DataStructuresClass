@@ -32,10 +32,18 @@ void Clock::printStandardTime(){
     }
     return;
   }
-  cout << hr%12 << ":" << min << endl;
+  if (min < 10){
+    cout << hr%12 << ":" << '0' << min << endl;
+  } else {
+    cout << hr%12 << ":" << min << endl;
+  }
 }
 void Clock::printMilitaryTime(){
-  cout << hr << ":" << min << endl;
+  if (min < 10){
+    cout << hr << ":" << '0' << min << endl;
+  } else {
+    cout << hr << ":" << min << endl;
+  }
 }
 
 
