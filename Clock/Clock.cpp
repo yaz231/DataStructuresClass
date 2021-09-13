@@ -1,12 +1,12 @@
 #include <stdio.h>  
-#include <iostream>
+// #include <iostream>
 #include "Clock.h"
 using namespace std;
 
 
 
 Clock::Clock(){
-  cout << "Created new Clock" << endl;
+  printf("Created Default Clock\n");
   setTime(0, 0);
 }
 Clock::Clock(int hour, int minutes){
@@ -18,32 +18,18 @@ void Clock::setTime(int hour, int minutes){
 }
 void Clock::increaseTime(int minutes){
   min += minutes;
-  while(min >= 60){
-    hr ++;
-    min -= 60;
-  }
+  hr += min/60;
+  min = min%60; 
 }
 void Clock::printStandardTime(){
-  if (hr == 0 || hr == 24){
-    if (min < 10){
-      cout << 12 << ":" << '0' << min << endl;
-    } else {
-      cout << 12 << ":" << min << endl;
-    }
-    return;
-  }
-  if (min < 10){
-    cout << hr%12 << ":" << '0' << min << endl;
+  if (hr%24 == 0){
+    printf("12:%02d\n",min);
   } else {
-    cout << hr%12 << ":" << min << endl;
+    printf("%02d:%02d\n", hr%12, min);
   }
 }
 void Clock::printMilitaryTime(){
-  if (min < 10){
-    cout << hr << ":" << '0' << min << endl;
-  } else {
-    cout << hr << ":" << min << endl;
-  }
+  printf("%02d:%02d\n", hr, min);
 }
 
 

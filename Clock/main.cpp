@@ -8,12 +8,11 @@ int main()
   // Clock c;
   // cout << "Hello World" << endl;
   // Clock test;
-  Clock test(13, 25);
-  // cout << test.getHour() << endl;
-  // cout << test2.getHour() << endl;
+  Clock test(12, 25);
   test.printStandardTime();
   test.printMilitaryTime();
-  // test2.printStandardTime();
-  // test2.printMilitaryTime();
+  test.increaseTime(45);
+  test.printStandardTime();
+  test.printMilitaryTime();
   return 0;
 }
