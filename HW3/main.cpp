@@ -62,10 +62,3 @@ ArrayBag<ItemType>::ArrayBag(int &entries[]){
   maxItems = DEFAULT_CAPACITY;
   itemCount = entries.size();
 }
-
-int main()
-{
-  Bag aBag;
-  abag.add(5);
-  abag.add(3);
-}
