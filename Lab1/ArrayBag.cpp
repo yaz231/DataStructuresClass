@@ -1,18 +1,29 @@
 #include "ArrayBag.h"
 #include <iostream>
 #include <cstddef>
-
-// Example of adding a new method
-template<class ItemType>
-void ArrayBag<ItemType>::doSomething()
-{
-	std::cout << "doing something\n";
-}  // end isEmpty
+// using namespace std;
 
 template<class ItemType>
 ArrayBag<ItemType>::ArrayBag(): itemCount(0), maxItems(DEFAULT_CAPACITY)
 {
 }  // end default constructor
+
+// Example of adding a new method
+template<class ItemType>
+void ArrayBag<ItemType>::bubbleSort(){
+	printf("doing something\n");
+   for (int i = 0; i < itemCount ; i ++){
+      for (int j = 0; j < itemCount - 1; j ++){
+         if (items[j] < items[j + 1]){
+            continue;
+         } else {
+            int temp = items[j];
+            items[j] = items[j + 1];
+            items[j + 1] = temp;
+         }
+      }
+   }
+}  // end isEmpty
 
 template<class ItemType>
 int ArrayBag<ItemType>::getCurrentSize() const

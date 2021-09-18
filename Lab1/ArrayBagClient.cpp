@@ -20,16 +20,19 @@ int main()
 	{
 		bag.add(items[i]);
 	}  // end for
-	
+	printf("It's done\n");
 	// You will remove this sample funciton from your program
-	bagTester(bag);
-	
-	// This shows the client program invoking the new method "doSomething"
-	// You will remove all traces of "doSomething" from all program files
-	bag.doSomething();
+	// bagTester(bag);
+	bag.bubbleSort();
 
-   return 0;
-   
+	vector<int> bagItems = bag.toVector();
+	int numberOfEntries = (int) bagItems.size();
+	for (int i = 0; i < numberOfEntries; i ++){
+		printf("%d ", bagItems[i]);
+	}
+	printf("\n");
+	printf("It's actually done");
+  return 0;
 }  // end main
 
 
@@ -44,6 +47,5 @@ void bagTester(ArrayBag<int>& bag)
    
 	cout << "isEmpty: returns " << bag.isEmpty() << endl;
 }  // end bagTester
-
 
 

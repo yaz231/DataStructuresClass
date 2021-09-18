@@ -1,5 +1,5 @@
-#ifndef BAG_INTERFACE_
-#define BAG_INTERFACE_
+#ifndef BAG_INTERFACE_H
+#define BAG_INTERFACE_H
 
 #include <vector>
 
@@ -8,7 +8,7 @@ class BagInterface
 {
 public:
 	// Example of adding a new method
-	virtual void doSomething() = 0;
+	virtual void bubbleSort() = 0;
 	
 	// Gets the current number of entries in this bag.
 	// Returns the integer number of entries currently in the bag

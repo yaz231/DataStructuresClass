@@ -1,5 +1,5 @@
-#ifndef ARRAY_BAG_
-#define ARRAY_BAG_
+#ifndef ARRAY_BAG_H
+#define ARRAY_BAG_H
 
 #include "BagInterface.h"
 
@@ -20,7 +20,7 @@ private:
 public:
 	ArrayBag();
 	// Example of adding a new method
-	void doSomething();
+	void bubbleSort();
 	int getCurrentSize() const;
 	bool isEmpty() const;
 	bool add(const ItemType& newEntry);
@@ -28,7 +28,7 @@ public:
 	void clear();
 	bool contains(const ItemType& anEntry) const;
 	int getFrequencyOf(const ItemType& anEntry) const;
-   std::vector<ItemType> toVector() const;
+  std::vector<ItemType> toVector() const;
 }; // end ArrayBag
 
 #include "ArrayBag.cpp"
