@@ -20,18 +20,36 @@ int main()
 	{
 		bag.add(items[i]);
 	}  // end for
-	printf("It's done\n");
-	// You will remove this sample funciton from your program
-	// bagTester(bag);
-	bag.bubbleSort();
 
 	vector<int> bagItems = bag.toVector();
+	printf("Array before it's sorted:\n");
+
+	//Printing Array Digits
 	int numberOfEntries = (int) bagItems.size();
 	for (int i = 0; i < numberOfEntries; i ++){
 		printf("%d ", bagItems[i]);
 	}
+	bag.bubbleSort();
+
+	bagItems = bag.toVector();
+
+	//Printing digits
+	// int numberOfEntries = (int) bagItems.size();
+	printf("Array after it's Sorted: \n");
+	for (int i = 0; i < numberOfEntries; i ++){
+		printf("%d ", bagItems[i]);
+	}
 	printf("\n");
-	printf("It's actually done");
+	int numberToFind;
+	printf("Enter a number to search: \n");
+	scanf("%d", &numberToFind);
+	printf("\n");
+	int index = bag.binarySearchRecursive(numberToFind);
+	if (index == -1){
+		printf("Couldn't find number in ArrayBag :(");
+	} else {
+		printf("%d found at index: %d", numberToFind, index);
+	}
   return 0;
 }  // end main
 

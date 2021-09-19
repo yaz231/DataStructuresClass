@@ -10,6 +10,9 @@ public:
 	// Example of adding a new method
 	virtual void bubbleSort() = 0;
 	
+	virtual int binarySearchRecursive(int findNum) = 0;
+
+	virtual int helperBSRecursive(int *arr, int start, int end, int numToFind) = 0;
 	// Gets the current number of entries in this bag.
 	// Returns the integer number of entries currently in the bag
 	virtual int getCurrentSize() const = 0;

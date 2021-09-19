@@ -11,7 +11,7 @@ ArrayBag<ItemType>::ArrayBag(): itemCount(0), maxItems(DEFAULT_CAPACITY)
 // Example of adding a new method
 template<class ItemType>
 void ArrayBag<ItemType>::bubbleSort(){
-	printf("doing something\n");
+	printf("Bubble Sorting\n");
    for (int i = 0; i < itemCount ; i ++){
       for (int j = 0; j < itemCount - 1; j ++){
          if (items[j] < items[j + 1]){
@@ -24,6 +24,28 @@ void ArrayBag<ItemType>::bubbleSort(){
       }
    }
 }  // end isEmpty
+
+template<class ItemType>
+int ArrayBag<ItemType>::binarySearchRecursive(int findNum){
+   printf("Entered into Recursive BS\n");
+   return helperBSRecursive(items, 0, itemCount, findNum);
+}
+
+template<class ItemType>
+int ArrayBag<ItemType>::helperBSRecursive(int *arr, int start, int end, int numToFind){
+   int mid = (start + end)/2;
+   printf("Start: %d, Mid: %d, End: %d", start, mid, end);
+   printf("\n");
+   if (arr[mid] == numToFind){
+      return mid;
+   } else if (arr[mid] > numToFind){
+      return helperBSRecursive(arr, start, mid - 1, numToFind);
+   } else if (numToFind > arr[end] or numToFind < arr[start]) {
+      return -1;
+   } else {
+      return helperBSRecursive(arr, mid, end, numToFind);
+   }
+}
 
 template<class ItemType>
 int ArrayBag<ItemType>::getCurrentSize() const
