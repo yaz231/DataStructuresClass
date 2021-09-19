@@ -19,10 +19,10 @@ private:
 
 public:
 	ArrayBag();
-	// Example of adding a new method
 	void bubbleSort();
 	int binarySearchRecursive(int findNum);
 	int helperBSRecursive(int *arr, int start, int end, int numToFind);
+	int binarySearchIterative(int numToFind);
 	int getCurrentSize() const;
 	bool isEmpty() const;
 	bool add(const ItemType& newEntry);

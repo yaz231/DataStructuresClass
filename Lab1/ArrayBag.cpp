@@ -8,10 +8,15 @@ ArrayBag<ItemType>::ArrayBag(): itemCount(0), maxItems(DEFAULT_CAPACITY)
 {
 }  // end default constructor
 
-// Example of adding a new method
+/******************************************************************************/
+/* Function:  bubbleSort
+/* Inputs:    NA
+/* Outputs:   NA
+/* Purpose:   This function sorts the ArrayBag entries using Bubble Sort
+/******************************************************************************/
 template<class ItemType>
 void ArrayBag<ItemType>::bubbleSort(){
-	printf("Bubble Sorting\n");
+	// printf("Bubble Sorting\n");
    for (int i = 0; i < itemCount ; i ++){
       for (int j = 0; j < itemCount - 1; j ++){
          if (items[j] < items[j + 1]){
@@ -23,29 +28,80 @@ void ArrayBag<ItemType>::bubbleSort(){
          }
       }
    }
-}  // end isEmpty
+}
 
+/******************************************************************************/
+/* Function:  binarySearchRecursive
+/* Inputs:    findNum, the number to search in the ArrayBag entries.
+/* Outputs:   NA
+/* Purpose:   This function ultimately returns the output from the helperfunction.
+/******************************************************************************/
 template<class ItemType>
 int ArrayBag<ItemType>::binarySearchRecursive(int findNum){
-   printf("Entered into Recursive BS\n");
+   // printf("Entered into Recursive BS\n");
    return helperBSRecursive(items, 0, itemCount, findNum);
 }
 
+/******************************************************************************/
+/* Function:  helperBSRecursive
+/* Inputs:    *arr, the array of entries from the ArrayBag
+/*            start, the beginning index of the array
+/*            end, the last index of the array
+/*            numToFind, the number to search for within the array
+/* Outputs:   the index of numToFind if it's contained in the array
+              or -1 if numToFind doesn't exist within ArrayBag's entries
+/* Purpose:   This function recursively searches through the area to look for numToFind
+              and returns the index of numToFind if it is found within the ArrayBag entries
+/******************************************************************************/
 template<class ItemType>
 int ArrayBag<ItemType>::helperBSRecursive(int *arr, int start, int end, int numToFind){
-   int mid = (start + end)/2;
-   printf("Start: %d, Mid: %d, End: %d", start, mid, end);
-   printf("\n");
-   if (arr[mid] == numToFind){
-      return mid;
-   } else if (arr[mid] > numToFind){
-      return helperBSRecursive(arr, start, mid - 1, numToFind);
-   } else if (numToFind > arr[end] or numToFind < arr[start]) {
-      return -1;
-   } else {
-      return helperBSRecursive(arr, mid, end, numToFind);
+   if (start <= end){
+      int mid = (start + end)/2;
+      // printf("Start: %d, Mid: %d, End: %d", start, mid, end);
+      // printf("\n");
+      if (arr[mid] == numToFind){
+         return mid;
+      } else if (arr[mid] > numToFind){//Search first half of sorted area
+         return helperBSRecursive(arr, start, mid - 1, numToFind);
+      } else if (arr[mid] < numToFind){//Search second half of sorted area
+         return helperBSRecursive(arr, mid, end, numToFind);
+      }
    }
+   return -1;
 }
+
+/******************************************************************************/
+/* Function:  binarySearchIterative
+/* Inputs:    numToFind, the number to search for within the array
+/* Outputs:   the index of numToFind if it's contained in the array
+              or -1 if numToFind doesn't exist within ArrayBag's entries
+/* Purpose:   This function iteratively searches through the area to look for numToFind
+              and returns the index of numToFind if it is found within the ArrayBag entries
+/******************************************************************************/
+template<class ItemType>
+int ArrayBag<ItemType>::binarySearchIterative(int numToFind){
+   // printf("Entered Iterative BS\n");
+   int start = 0;
+   int end = itemCount;
+   int mid;
+   while (start < end){
+      mid = (start + end)/2;
+      // printf("Start: %d, Mid: %d, End: %d", start, mid, end);
+      // printf("\n");
+      if (items[mid] < numToFind){//Search second half of sorted array
+         start = mid + 1;
+      } else {//Search first half of sorted array
+         end = mid;
+      }
+   }
+
+   if (items[start] == numToFind){
+      return start;
+   }
+
+   return -1;
+}
+
 
 template<class ItemType>
 int ArrayBag<ItemType>::getCurrentSize() const

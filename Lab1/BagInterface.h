@@ -7,12 +7,14 @@ template<class ItemType>
 class BagInterface
 {
 public:
-	// Example of adding a new method
+	// Sorts the arrary using bubbleSort
 	virtual void bubbleSort() = 0;
-	
+	//Searches the ArrayBag recursively and returns the index of the element if it exists in the array, if not, //return -1
 	virtual int binarySearchRecursive(int findNum) = 0;
-
+	//Helper method for recursion
 	virtual int helperBSRecursive(int *arr, int start, int end, int numToFind) = 0;
+	//Searches the ArrayBag iteratively and returns the index of the element if it exists in the array, if not, //return -1
+	virtual int binarySearchIterative(int numToFind) = 0;
 	// Gets the current number of entries in this bag.
 	// Returns the integer number of entries currently in the bag
 	virtual int getCurrentSize() const = 0;
