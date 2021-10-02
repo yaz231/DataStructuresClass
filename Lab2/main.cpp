@@ -1,5 +1,6 @@
 #include <iostream>
 #include <fstream>
+#include <sstream>
 #include <string>
 #include "LinkedStack.h"
 
@@ -7,20 +8,34 @@ using namespace std;
 
 int main()
 {
-  printf("Please enter a file name: \n");
-  string fileName;
-  scanf("%s", &fileName);
+  // string test = "auctions.txt";
+  // printf("Length: %d\n", test.size());
+  // printf("Please enter a file name: ");
+  // string fileName;
+  // scanf("%12s", &fileName);
+  // printf("Filename: %s", fileName);
 	LinkedStack<int> link;
-  ifstream myfile(fileName);
-  int bid;
-  string myString;
-  if (myfile.is_open()){
-    char myChar;
-    while (myfile){
-      myChar = myfile.get();
-      cout << myChar;
-    }
+  fstream fin("auctions.txt");
+  string line;
+  while(getline(fin, line)){
+    // if (line[0] == 'V') continue;
+      int bid;
+      // printf("HERE");
+      stringstream(line) >> bid;
+      printf("%d\n", bid);
+      if (link.isEmpty()){
+        link.push(bid);
+      } else {
+        if (bid > link.peek()) link.push(bid);
+        // printf("%d\n", bid);
+      }
   }
+  // printf("DONE\n");
+  // while(!link.isEmpty()){
+  //   printf("%d\n", link.peek());
+  //   link.pop();
+  // }
+  printf("Final Bid: %d\n", link.peek());
 
   return 0;
 }  // end main
