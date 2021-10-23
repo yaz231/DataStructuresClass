@@ -1,37 +1,38 @@
 /** @file LinkedList.cpp */ 
 #include <cassert> // For assert
 #include "LinkedList.h" // Header file
-#include <string>
+#include <string> 
 #include <vector>
 // using namespace std;
-template< class ItemType> 
-LinkedList<ItemType>::LinkedList() : headPtr( nullptr), numItems(0) 
-{ 
+
+LinkedList::LinkedList(){
+  numItems = 0;
+  headPtr = nullptr;
 } // end default constructor
 
-template<class ItemType>
-int LinkedList<ItemType>::getLength() const {
+
+int LinkedList::getLength() {
   return numItems;
 } // end of getLength
 
-template<class ItemType>
-void LinkedList<ItemType>:: addNode(string aString){
-  Node<string>* newNode = new Node();
+
+void LinkedList:: addNode(string aString){
+  Node* newNode = new Node();
   newNode->setItem(aString);
   newNode->setNext(nullptr);
 
   if (headPtr == NULL || headPtr->getItem() >= aString){
-    newNode->setNext = headPtr;
+    newNode->setNext(headPtr);
     headPtr = newNode;
     return;
   } else if(headPtr->getNext() != NULL && headPtr->getNext()->getItem() >= aString){
-    Node<string>* nextNode = headPtr->getNext();
+    Node* nextNode = headPtr->getNext();
     newNode->setNext(nextNode);
     headPtr->setNext(newNode);
     return;
   } else {
-    Node<string>* left;
-    Node<string>* right;
+    Node* left;
+    Node* right;
     while(right != NULL && right->getNext()->getItem() <= aString){
       left = right;
       right = right->getNext();
@@ -49,10 +50,10 @@ void LinkedList<ItemType>:: addNode(string aString){
   // currPtr->setNext(newPtr);
 }// end of AddNode
 
-template<class ItemType>
-vector<string> LinkedList<ItemType>::toVector() const
+
+vector<string> LinkedList::toVector() const
 {
-  Node<string>* currPtr = headPtr;
+  Node* currPtr = headPtr;
   vector<string> vectorStrings;
 	for (int i = 0; i < numItems; i++)
 	  vectorStrings.push_back(currPtr->getItem());

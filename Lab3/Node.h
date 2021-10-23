@@ -1,21 +1,20 @@
 /** @file Node.h */ 
-#ifndef _NODE 
-#define _NODE 
+#ifndef NODE_H 
+#define NODE_H
 #include <string>
 using namespace std;
 
-template< class ItemType> 
 class Node 
 { 
 private: 
  string line; // A line of text
- Node<ItemType>* next; // Pointer to next node
+ Node* next; // Pointer to next node
 public: 
   Node(); 
   void setItem(string aString); 
-  void setNext(Node<ItemType>* nextNodePtr); 
+  void setNext(Node* nextNodePtr); 
   string getItem() const ; 
-  Node<ItemType>* getNext() const ; 
+  Node* getNext() const ; 
 }; // end Node 
 #include "Node.cpp" 
 #endif

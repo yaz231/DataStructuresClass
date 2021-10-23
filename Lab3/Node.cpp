@@ -3,28 +3,29 @@
 #include <cstddef> 
 #include <string>
 using namespace std;
-
-template< class ItemType> 
-Node<ItemType>::Node() : next( nullptr), line("")
+ 
+Node::Node()
 { 
+  next = nullptr;
+  line = "";
 } // end default constructor 
-template< class ItemType> 
-void Node<ItemType>::setItem(string aString) 
+
+void Node::setItem(string aString) 
 { 
  line = aString; 
 } // end setItem 
-template< class ItemType> 
-void Node<ItemType>::setNext(Node<ItemType>* nextNodePtr) 
+ 
+void Node::setNext(Node* nextNodePtr) 
 {
  next = nextNodePtr; 
 } // end setNext 
-template< class ItemType> 
-string Node<ItemType>::getItem() const
+
+string Node::getItem() const
 { 
  return line; 
 } // end getItem 
-template< class ItemType> 
-Node<ItemType>* Node<ItemType>::getNext() const
+
+Node* Node::getNext() const
 { 
  return next; 
 } // end getNext
