@@ -2,6 +2,7 @@
 #include <fstream>
 #include <sstream>
 #include <string>
+#include <cstdio>
 #include "LinkedStack.h"
 
 using namespace std;
@@ -10,12 +11,13 @@ int main()
 {
   // string test = "auctions.txt";
   // printf("Length: %d\n", test.size());
-  // printf("Please enter a file name: ");
-  // string fileName;
-  // scanf("%12s", &fileName);
-  // printf("Filename: %s", fileName);
+  printf("Please enter a file name: ");
+  string fileName;
+  scanf("%20s", fileName);
+  cout << fileName << endl;
+  printf("Filename: %s", fileName);
 	LinkedStack<int> link;
-  fstream fin("auctions.txt");
+  fstream fin(fileName);
   string line;
   while(getline(fin, line)){
     // if (line[0] == 'V') continue;
