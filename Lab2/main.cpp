@@ -12,28 +12,35 @@ int main(){
   printf("Please enter a file name: ");
   string fileName;
   cin >> fileName;
-  cout << "Filename: " << fileName << endl;
+  // cout << "Filename: " << fileName << endl;
 	
   LinkedStack<int> link; //Initialize Stack
   fstream fin(fileName);
+  
+  //If file doesn't exist, exit program
+  fin.open(fileName);
+  if (fin.fail()){
+    printf("Error: File not found!\n");
+    printf("Exiting Program\n");
+    exit;
+  }
+  
   string line;
   while(getline(fin, line)){
-    if (firstItem){
+    if (firstItem){//Skip the first item in the file, because that's the name of the auctioned item
       firstItem = false;
-      cout << line << '\n';
+      // cout << line << '\n'; 
       itemName = line;
-      // printf("%s",itemName);
       continue;
     }
     int bid;
 
     stringstream(line) >> bid;
-    printf("%d\n", bid);
+    // printf("%d\n", bid);
     if (link.isEmpty()){ //Beginning of the text file always pushed to stack
       link.push(bid); 
     } else {
       if (bid > link.peek()) link.push(bid); //If top of stack is less than new line entry, push to stack
-      // printf("%d\n", bid);
     }
   }
   // printf("DONE\n");
@@ -43,7 +50,6 @@ int main(){
   //   link.pop();
   // }
 
-  // printf("Final Bid: %d for %s\n", link.peek(), itemName);//Final Bid is the last entry pushed to stack
-  cout << "Final Bid: " << link.peek() << " for " << itemName << endl;
+  cout << "Final Bid: " << link.peek() << " for " << itemName << endl;//Find the final bid by peeking at top of stack
   return 0;
 }  // end main
