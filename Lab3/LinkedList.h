@@ -17,7 +17,7 @@ class LinkedList{
     // Array operations: 
     int getLength();
     void addNode(string aString);
-    vector<string> toVector() const;
+    vector<string> toVector();
 }; // end LinkedList 
 #include "LinkedList.cpp" 
 #endif

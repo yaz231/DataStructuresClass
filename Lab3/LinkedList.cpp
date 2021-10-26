@@ -17,47 +17,46 @@ int LinkedList::getLength() {
 
 
 void LinkedList:: addNode(string aString){
-  Node* newNode = new Node();
-  newNode->setItem(aString);
-  newNode->setNext(nullptr);
-
-  if (headPtr == NULL || headPtr->getItem() >= aString){
-    newNode->setNext(headPtr);
-    headPtr = newNode;
+  printf("Adding NODE\n");
+  // printf("String to add: %s\n", aString.c_str());
+  Node* newPtr = new Node();
+  newPtr->setItem(aString);
+  newPtr->setNext(nullptr);
+  Node* prevPtr = headPtr;
+  if (headPtr == nullptr){
+    headPtr = newPtr;
+    numItems ++;
     return;
-  } else if(headPtr->getNext() != NULL && headPtr->getNext()->getItem() >= aString){
-    Node* nextNode = headPtr->getNext();
-    newNode->setNext(nextNode);
-    headPtr->setNext(newNode);
-    return;
-  } else {
-    Node* left;
-    Node* right;
-    while(right != NULL && right->getNext()->getItem() <= aString){
-      left = right;
-      right = right->getNext();
-    }
-    left->setNext(newNode);
-    newNode->setNext(right);
   }
-  // Node<string>* currPtr = headPtr;
-  // while (currPtr->getNext() != nullptr && ){
-  //   currPtr = currPtr->getNext();
-  // }
-  // Node<string>* newPtr;
-  // newPtr->setItem(aString);
-  // newPtr->setNext(nullptr);
-  // currPtr->setNext(newPtr);
+  Node* nextPtr= prevPtr->getNext();;
+  while(prevPtr != nullptr && (prevPtr->getItem() <= aString)){
+    if (prevPtr->getItem() == aString){//No duplicates
+      return;
+    }
+    prevPtr = nextPtr;
+    nextPtr = nextPtr->getNext();
+  }
+  prevPtr->setNext(newPtr);
+  if (nextPtr != nullptr){
+    newPtr->setNext(nextPtr);
+  }
+  numItems ++;
+
 }// end of AddNode
 
 
-vector<string> LinkedList::toVector() const
+vector<string> LinkedList::toVector() 
 {
+  printf("TO VECTOR\n");
   Node* currPtr = headPtr;
+  string s;
   vector<string> vectorStrings;
-	for (int i = 0; i < numItems; i++)
-	  vectorStrings.push_back(currPtr->getItem());
+  while (currPtr != nullptr){
+    vectorStrings.push_back(currPtr->getItem());
+    printf("%s", currPtr->getItem().c_str());
+    // cout << currPtr->getItem() << endl;
     currPtr = currPtr->getNext();
-   return vectorStrings;
+  }
+  return vectorStrings;
 }  // end toVector
 // end of implementation file 

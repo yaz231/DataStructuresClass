@@ -8,62 +8,42 @@
 using namespace std;
 
 int main(){
-  struct dirent *d;
-    DIR *dr;
-    dr = opendir(".");
-    if(dr!=NULL)
-    {
-        cout<<"List of Files & Folders:-\n";
-        for(d=readdir(dr); d!=NULL; d=readdir(dr))
-        {
-            cout<<d->d_name<<endl;
-        }
-        closedir(dr);
-    }
-    else
-        cout<<"\nError Occurred!";
-    cout<<endl;
-    
-
-  bool firstItem = true;
-  // Node<string>* headPtr;
-  string stringName;
   printf("Please enter a file name: ");
   string fileName;
   cin >> fileName;
-  cout << "Filename: " << fileName << endl;
+  // cout << "Filename: " << fileName << endl;
 	
   LinkedList link; //Initialize Linked List
-  fstream fin(fileName);
+  ifstream file_reader(fileName);
   
   //If file doesn't exist, exit program
-  fin.open(fileName);
-  if (fin.fail()){
+  if (!file_reader){
     printf("Error: File not found!\n");
     printf("Exiting Program\n");
-    exit;
+    return 1;
+  } else {
+    printf("File successfully opened!\n");
   }
   
   string line;
-  while(getline(fin, line)){
-    if (firstItem){//Skip the first item in the file, because that's the name of the auctioned item
-      firstItem = false;
-      // cout << line << '\n'; 
-      stringName = line;
-      continue;
-    }
-    string bid;
-
-    stringstream(line) >> bid;
-    // printf("%d\n", bid);
-    link.addNode(bid);
+  int i = 1;
+  printf("READING\n");
+  while(getline(file_reader, line)){
+    // printf("%s\n",line.c_str());
+    printf("Line: %d\n", i);
+    i ++;
+    link.addNode(line.c_str());
   }
-  printf("DONE\n");
+  printf("FINISHED READING\n");
   // Verify contents of stack after traversing through file.
   vector<string> vec = link.toVector();
-  for (int i = 0; i <= link.getLength(); i++){
-    printf("%s", vec[i]);
-  }
+  // printf("Size of vector: %d", vec.size());
+  // for (int i = 0; i <= vec.size(); i++){
+  //   // printf("IN THE LOOP\n");
+  //   // printf("%d Element: %s\n", i, vec[i]);
+  //   // printf("%s",vec[i]);
+  //   // cout << vec[i] << endl;
+  // }
 
   return 0;
 }  // end main
