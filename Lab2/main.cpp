@@ -2,6 +2,7 @@
 #include <fstream>
 #include <sstream>
 #include <string>
+#include <cstdio>
 #include "LinkedStack.h"
 
 using namespace std;
@@ -15,6 +16,7 @@ int main(){
   // cout << "Filename: " << fileName << endl;
 	
   LinkedStack<int> link; //Initialize Stack
+
   fstream fin(fileName);
   
   //If file doesn't exist, exit program
