@@ -48,6 +48,18 @@ int LinkedBag<ItemType>::recurseFrequency(Node<ItemType> *head, ItemType& anEntr
   return count;
 }
 
+int LinkedBag<ItemType>::getFrequencyOf(const ItemType& anEntry){
+  Node<ItemType>* curr = headptr;
+  int freq = 0;
+  while (curr != NULL){
+    if (curr->getItem() == anEntry){
+      freq ++;
+    }
+    curr = curr->getNext();
+  }
+  return curr;
+}
+
 //Question 5
 LinkedBag<ItemType>::LinkedBag(ItemType[] entries){
   itemCount = entries.size();
