@@ -11,7 +11,6 @@ int main(){
   printf("Please enter a file name: ");
   string fileName;
   cin >> fileName;
-  // cout << "Filename: " << fileName << endl;
 	
   LinkedList link; //Initialize Linked List
   ifstream file_reader(fileName);
@@ -28,22 +27,12 @@ int main(){
   string line;
   int i = 1;
   printf("READING\n");
-  while(getline(file_reader, line)){
-    // printf("%s\n",line.c_str());
-    printf("Line: %d\n", i);
-    i ++;
+  while(!file_reader.eof()){
+    getline(file_reader, line);
     link.addNode(line.c_str());
   }
   printf("FINISHED READING\n");
   // Verify contents of stack after traversing through file.
   vector<string> vec = link.toVector();
-  // printf("Size of vector: %d", vec.size());
-  // for (int i = 0; i <= vec.size(); i++){
-  //   // printf("IN THE LOOP\n");
-  //   // printf("%d Element: %s\n", i, vec[i]);
-  //   // printf("%s",vec[i]);
-  //   // cout << vec[i] << endl;
-  // }
-
   return 0;
 }  // end main
