@@ -15,53 +15,54 @@ int LinkedList::getLength() {
   return numItems;
 } // end of getLength
 
-
 void LinkedList:: addNode(string aString){
-  printf("Adding NODE\n");
-  // printf("String to add: %s\n", aString.c_str());
-  Node* newPtr = new Node();
-  newPtr->setItem(aString);
-  newPtr->setNext(nullptr);
-  Node* prevPtr = headPtr;
-  if (headPtr == nullptr){
-    headPtr = newPtr;
-    numItems ++;
-    return;
-  }
-  Node* nextPtr = prevPtr->getNext();
-  while(prevPtr != nullptr && (prevPtr->getItem() <= aString)){
-    if (prevPtr->getItem() == aString){//No duplicates
-      printf("Duplicates Found!\n");
-      return;
-    }
-    if (nextPtr == nullptr) {
-      printf("NEXT POINTER IS NULL\n");
-      break;
-    }
-    prevPtr = nextPtr;
-    nextPtr = nextPtr->getNext();
-    printf("PREV POINTER: %s\n", prevPtr->getItem().c_str());
-    printf("NEXT POINTER: %s\n", nextPtr);
-    printf("\n");
-  }
-  prevPtr->setNext(newPtr);
-  if (nextPtr != nullptr){
-    newPtr->setNext(nextPtr);
-  }
-  numItems ++;
-}// end of AddNode
+  Node* newNode;
+  Node* currNode;
+  Node* prevNode;
 
+  //Creating new Node for aString
+  newNode = new Node;
+  newNode->setItem(aString);
+  newNode->setNext(nullptr);
+
+  if (!headPtr) {//if LinkedList is empty, assign headPtr to the new Node
+    headPtr = newNode;
+  } else {
+    currNode = headPtr;
+    if (aString < headPtr->getItem()){//If our aString comes before the beginning of the LinkedList, add it to the front
+      numItems ++;
+      newNode->setNext(headPtr);
+      headPtr = newNode;
+    } else if (aString == headPtr->getItem()){//Ignoring duplicates
+      return;
+    } else {
+      prevNode = currNode;
+      while (currNode && currNode->getItem() < aString){//Looping through LinkedList until we reach the end or we reach the Node where we should insert newNode
+        prevNode = currNode;
+        currNode = currNode->getNext();
+      }
+      if (!currNode){//If we've reached the end
+        prevNode->setNext(newNode);
+      } else if (currNode->getItem() == aString){//Ignore duplicates
+        return;
+      } else {//Add Node
+        newNode->setNext(currNode);
+        prevNode->setNext(newNode);
+      }
+      numItems ++;
+    }
+  }
+}
 
 vector<string> LinkedList::toVector() 
 {
-  printf("TO VECTOR\n");
+  // printf("TO VECTOR\n");
   Node* currPtr = headPtr;
   string s;
   vector<string> vectorStrings;
-  while (currPtr != nullptr){
+  while (currPtr != nullptr){//Unless we reach the end, loop through linked list and add all the node values to vector
     vectorStrings.push_back(currPtr->getItem());
-    printf("%s", currPtr->getItem().c_str());
-    // cout << currPtr->getItem() << endl;
+    // printf("%s\n", currPtr->getItem().c_str());
     currPtr = currPtr->getNext();
   }
   return vectorStrings;
