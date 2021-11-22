@@ -26,6 +26,13 @@ void printMenu(){
 	printf("Press ENTER after you've made your selection\n");
 }
 
+/******************************************************************************/
+/* Function:  printQueueMenu
+/* Inputs:    NA
+/* Outputs:   NA
+/* Purpose:   This function prints out the menu listing to display for the user
+/*						to choose from after they decide which datatype to use for the Queue
+/******************************************************************************/
 void printQueueMenu(){
 	printf("Welcome to the Queue Testing Menu!\n");
 	printf("\n");
@@ -58,36 +65,36 @@ int main() {
 		switch(queueMenuNumber){
 			case 1:
 				printf("Enter the item to Add:");
-                if (menuNumber == 1){
-                    int numberToAdd;
-				    scanf("%d", &numberToAdd);
-				    q.enqueue(numberToAdd);
-                } else if (menuNumber == 2) {
-                    float floatToAdd;
-				    scanf("%f", &floatToAdd);
-				    q.enqueue(floatToAdd);
-                } else if (menuNumber == 3) {
-                    string stringToAdd;
-				    cin >> stringToAdd;
-				    q.enqueue(stringToAdd);
-                }
+        if (menuNumber == 1){
+        	int numberToAdd;
+				  scanf("%d", &numberToAdd);
+				  q.enqueue(numberToAdd);
+        } else if (menuNumber == 2) {
+          float floatToAdd;
+				  scanf("%f", &floatToAdd);
+				  q.enqueue(floatToAdd);
+        } else if (menuNumber == 3) {
+          string stringToAdd;
+				  cin >> stringToAdd;
+				  q.enqueue(stringToAdd);
+        }
 				break;
 
 			case 2:
 				printf("Removing first Item from the Queue:");
-                if (menuNumber == 1){
-                    int numberRemoved = 0;
-				    				q.dequeue(numberRemoved);
-                    printf("Item removed: %d", numberRemoved);
-                } else if (menuNumber == 2) {
-                    float floatRemoved;
-				    				q.dequeue(floatRemoved);
-                    printf("Item removed: %d", floatRemoved);
-                } else if (menuNumber == 3) {
-                    string stringRemoved;
-				    				q.dequeue(stringRemoved);
-                    printf("Item removed: %s", stringRemoved);
-                }
+        if (menuNumber == 1){
+        	int numberRemoved = 0;
+					q.dequeue(numberRemoved);
+          printf("Item removed: %d", numberRemoved);
+        } else if (menuNumber == 2) {
+          float floatRemoved;
+					q.dequeue(floatRemoved);
+          printf("Item removed: %d", floatRemoved);
+        } else if (menuNumber == 3) {
+          string stringRemoved;
+					q.dequeue(stringRemoved);
+          printf("Item removed: %s", stringRemoved);
+        }
 				break;
 
 			case 3:
