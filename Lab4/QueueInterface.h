@@ -1,15 +1,17 @@
 #include <iostream>
+#include <memory>
 #include <cstdlib>
+#include <vector>
 using namespace std;
  
 // Define the default capacity of a Queue
 #define SIZE 10
  
 // A class to represent a Queue
-template <class X>
+template <class ItemType>
 class Queue {
     private:
-        X *queueArray;
+        unique_ptr<ItemType []> queueArray;
         int queueSize;
         int front;
         int rear;
@@ -18,55 +20,54 @@ class Queue {
     public:
         Queue(int size = SIZE);         // constructor
     
-        void enqueue(X);
-        void dequeue(X &);
+        void enqueue(ItemType);
+        void dequeue(ItemType &);
 
         bool isEmpty() const;
         bool isFull() const;
+        vector<ItemType> toVector(); 
 
         // destructor
         void clear();
 };
  
 // Constructor to initialize the Queue
-template <class X>
-Queue<X>::Queue(int size)
+template <class ItemType>
+Queue<ItemType>::Queue(int size)
 {
-    queueArray = new X[size];
+    queueArray = new ItemType[size];
     queueSize = size;
     front = -1;
     rear = -1;
 }
  
-// Function to add an element `x` to the Queue
-template <class X>
-void Queue<X>::enqueue(X x) {
+// Function to add an element `item` to the Queue
+template <class ItemType>
+void Queue<ItemType>::enqueue(ItemType item) {
     if (isFull())
     {
         cout << "The Queue is Full\n";
         exit(1);
     } else {
-        cout << "Inserting " << x << endl;
+        cout << "Inserting " << item << endl;
         //Calculate the new rear position
         rear = (rear + 1) % queueSize;
         //Insert new item
-        queueArray[rear] = num;
+        queueArray[rear] = item;
         //Update item count
         numItems ++;    
     }
 }
  
 // Function to dequeue the top element from the Queue
-template <class X>
-void Queue<X>::dequeue(X &num)
-{
+template <class ItemType>
+void Queue<ItemType>::dequeue(ItemType &num) {
     // check for Queue underflow
-    if (isEmpty())
-    {
+    if (isEmpty()){
         cout << "The Queue is empty.\n";
         exit(1);
     } else {
-        cout << "Removing front element from the Queue" << peek() << endl;
+        printf("Removing front element from the Queue");
         //Move front
         front = (front + 1) % queueSize;
         //Retrieve the front item
@@ -77,24 +78,41 @@ void Queue<X>::dequeue(X &num)
  }
 
 //Function to check if the Queue is empty or not
-template <class X>
-bool Queue<X>::isEmpty() const{
+template <class ItemType>
+bool Queue<ItemType>::isEmpty() const{
     return numItems == 0;               
 }
  
 //Function to check if the Queue is full or not
-template <class X>
-bool Queue<X>::isFull() const{
-    return numItems == queSize;    
+template <class ItemType>
+bool Queue<ItemType>::isFull() const{
+    return numItems == queueSize;    
 }
 
 //Function to reset the Queue
-template <class X>
-void Queue<X>::clear() {
+template <class ItemType>
+void Queue<ItemType>::clear() {
     front = -1;
     rear = -1;
     numItems = 0;   
 }
+
+template <class ItemType>
+vector<ItemType> Queue<ItemType>::toVector() {
+  vector<ItemType> vector_done;
+  if (queueSize == 0){
+    return vector_done;
+  } else {
+    for (int i = 0; i <= size; i ++){
+        ItemType item;
+        dequeue(item);
+        vector_done.push_back(item);
+        enqueue(item);
+    }
+  }
+  return vector_done;
+}  // end toVector
+
 
 // int main()
 // {
