@@ -109,11 +109,18 @@ vector<ItemType> Queue<ItemType>::toVector() {
     //     vector_done.push_back(item);
     //     enqueue(item);
     // }
-    int new_front = (front + 1) % queueSize;
-    int new_rear = (rear + 1) % queueSize;
-    for (int i = 0; i < queueSize; i ++){
-        vector_done.push_back(queueArray[new_front + i]);
+    int new_front = front;
+    int new_rear = rear;
+    int num = queueSize;
+    while (num > 0){
+        new_front = (front + 1) % queueSize;
+        new_rear = (rear + 1) % queueSize;
+        vector_done.push_back(queueArray[new_front]);
+        num --;
     }
+    // for (int i = 0; i < queueSize; i ++){
+    //     vector_done.push_back(queueArray[new_front + i]);
+    // }
   }
   return vector_done;
 }  // end toVector
