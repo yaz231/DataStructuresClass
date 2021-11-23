@@ -48,78 +48,120 @@ void printQueueMenu(){
 int main() {
   int menuNumber = 0;
 	printMenu();
-	scanf("%d", &menuNumber); //Scanf is used to accept user input to determine menu option
-	if (menuNumber == 1) {
-		Queue<int> q(10);
-	} else if (menuNumber == 2) {
-		Queue<float> q(10);
-	} else if (menuNumber == 3) {
-		Queue<string> q(10);
-	} else 
-		return 0;
-	while(true){
-		int queueMenuNumber;
-		printQueueMenu();
-		scanf("%d", &queueMenuNumber); //Scanf is used to accept user input to determine menu option
+	scanf("%d", &menuNumber); //Scanf is used to accept user input to determine menu 
+	// if (menuNumber == 1) {
+	// 	// Queue<int> q(10);
+	// 	Queue<int> intq(10);
+	// } else if (menuNumber == 2) {
+	// 	// Queue<float> q(10);
+	// 	Queue<float> floatq(10);
+	// } else if (menuNumber == 3) {
+	// 	// Queue<string> q(10);
+	// 	Queue<string> stringq(10);
+	// } else 
+	// 	return 0;
+	Queue<int> intq(10);
+	Queue<float> floatq(10);
+	Queue<string> stringq(10);
+
+	int queueMenuNumber;
+	printQueueMenu();
+	scanf("%d", &queueMenuNumber); 
+	while(queueMenuNumber != 5){
 		//Switch Statement to Correspond to User Input
 		switch(queueMenuNumber){
-			case 1:
+			case 1: 																											//INTEGER QUEUE
 				printf("Enter the item to Add:");
-        if (menuNumber == 1){
-        	int numberToAdd;
-				  scanf("%d", &numberToAdd);
-				  q.enqueue(numberToAdd);
-        } else if (menuNumber == 2) {
-          float floatToAdd;
-				  scanf("%f", &floatToAdd);
-				  q.enqueue(floatToAdd);
-        } else if (menuNumber == 3) {
-          string stringToAdd;
-				  cin >> stringToAdd;
-				  q.enqueue(stringToAdd);
+				switch (menuNumber){
+					case 1:
+						int numberToAdd;
+						scanf("%d", &numberToAdd);
+						intq.enqueue(numberToAdd);
+						break;
+
+        	case 2:
+						float floatToAdd;
+						scanf("%f", &floatToAdd);
+						floatq.enqueue(floatToAdd);
+						break;
+
+        	case 3:
+						string stringToAdd;
+						cin >> stringToAdd;
+						stringq.enqueue(stringToAdd);
+						break;
         }
 				break;
 
-			case 2:
+			case 2: 																											//FLOAT QUEUE
 				printf("Removing first Item from the Queue:");
-        if (menuNumber == 1){
-        	int numberRemoved = 0;
-					q.dequeue(numberRemoved);
-          printf("Item removed: %d", numberRemoved);
-        } else if (menuNumber == 2) {
-          float floatRemoved;
-					q.dequeue(floatRemoved);
-          printf("Item removed: %d", floatRemoved);
-        } else if (menuNumber == 3) {
-          string stringRemoved;
-					q.dequeue(stringRemoved);
-          printf("Item removed: %s", stringRemoved);
+				switch (menuNumber){
+					case 1:{
+						int numberRemoved = 0;
+						intq.dequeue(numberRemoved);
+						printf("Item removed: %d", numberRemoved);
+						break;
+					}
+
+        	case 2:{
+						float floatRemoved = 0.0;
+						floatq.dequeue(floatRemoved);
+						printf("Item removed: %d", floatRemoved);
+						break;
+					}
+
+        	case 3:{
+						string stringRemoved = "";
+						stringq.dequeue(stringRemoved);
+						printf("Item removed: %s", stringRemoved);
+						break;
+					}
+
         }
 				break;
 
-			case 3:
+			case 3:																													//STRING QUEUE
 				printf("Displaying the Queue:\n");
-				if (menuNumber == 1){
-					vector<int> vec = q.toVector();
-					for (int i = 0; i < vec.size(); i ++){
-						printf("Queue: %d\n", vec[i]);
+				switch (menuNumber){
+					case 1:{
+						vector<int> vec = intq.toVector();
+						printf("Queue: ");
+						for (int i = 0; i < vec.size(); i ++){
+							printf("%d ", vec[i]);
+						}
+						printf("\n");
+						break;
 					}
-				} else if (menuNumber == 2){
-					vector<float> vec = q.toVector();
-					for (int i = 0; i < vec.size(); i ++){
-						printf("Queue: %f\n", vec[i]);
+
+					case 2:{
+						vector<float> vec = floatq.toVector();
+						printf("Queue: ");
+						for (int i = 0; i < vec.size(); i ++){
+							printf("%f ", vec[i]);
+						}
+						printf("\n");
+						break;
 					}
-				} else if (menuNumber == 3){
-					vector<string> vec = q.toVector();
-					for (int i = 0; i < vec.size(); i ++){
-						printf("Queue: %s\n", vec[i].c_str());
+
+					case 3:{
+						vector<string> vec = stringq.toVector();
+						printf("Queue: ");
+						for (int i = 0; i < vec.size(); i ++){
+							printf("%s ", vec[i].c_str());
+						}
+						printf("\n");
+						break;
 					}
+
 				}
 				break;
+
 
 			case 4:
 				return 0;
 		}
+			printQueueMenu();
+			scanf("%d", &queueMenuNumber); //Scanf is used to accept 
 	}
   return 0;
 }  // end main

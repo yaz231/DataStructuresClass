@@ -33,15 +33,15 @@ class Queue {
  
 // Constructor to initialize the Queue
 template <class ItemType>
-Queue<ItemType>::Queue(int size)
-{
-    queueArray = new ItemType[size];
+Queue<ItemType>::Queue(int size) {
+    queueArray = make_unique<ItemType []>(size);
     queueSize = size;
+    numItems = 0;
     front = -1;
     rear = -1;
 }
  
-// Function to add an element `item` to the Queue
+// Function to add an element 'item' to the Queue
 template <class ItemType>
 void Queue<ItemType>::enqueue(ItemType item) {
     if (isFull())
@@ -49,7 +49,7 @@ void Queue<ItemType>::enqueue(ItemType item) {
         cout << "The Queue is Full\n";
         exit(1);
     } else {
-        cout << "Inserting " << item << endl;
+        // cout << "Inserting " << item << endl;
         //Calculate the new rear position
         rear = (rear + 1) % queueSize;
         //Insert new item
@@ -67,7 +67,7 @@ void Queue<ItemType>::dequeue(ItemType &num) {
         cout << "The Queue is empty.\n";
         exit(1);
     } else {
-        printf("Removing front element from the Queue");
+        // printf("Removing front element from the Queue");
         //Move front
         front = (front + 1) % queueSize;
         //Retrieve the front item
@@ -103,11 +103,16 @@ vector<ItemType> Queue<ItemType>::toVector() {
   if (queueSize == 0){
     return vector_done;
   } else {
-    for (int i = 0; i <= size; i ++){
-        ItemType item;
-        dequeue(item);
-        vector_done.push_back(item);
-        enqueue(item);
+    // for (int i = 0; i <= queueSize; i ++){
+    //     ItemType item;
+    //     dequeue(item);
+    //     vector_done.push_back(item);
+    //     enqueue(item);
+    // }
+    int new_front = (front + 1) % queueSize;
+    int new_rear = (rear + 1) % queueSize;
+    for (int i = 0; i < queueSize; i ++){
+        vector_done.push_back(queueArray[new_front + i]);
     }
   }
   return vector_done;
