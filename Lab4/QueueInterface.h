@@ -47,7 +47,6 @@ void Queue<ItemType>::enqueue(ItemType item) {
     if (isFull())
     {
         cout << "The Queue is Full\n";
-        exit(1);
     } else {
         // cout << "Inserting " << item << endl;
         //Calculate the new rear position
@@ -65,7 +64,6 @@ void Queue<ItemType>::dequeue(ItemType &num) {
     // check for Queue underflow
     if (isEmpty()){
         cout << "The Queue is empty.\n";
-        exit(1);
     } else {
         // printf("Removing front element from the Queue");
         //Move front
@@ -111,10 +109,10 @@ vector<ItemType> Queue<ItemType>::toVector() {
     // }
     int new_front = front;
     int new_rear = rear;
-    int num = queueSize;
+    int num = numItems;
     while (num > 0){
-        new_front = (front + 1) % queueSize;
-        new_rear = (rear + 1) % queueSize;
+        new_front = (new_front + 1) % queueSize;
+        new_rear = (new_rear + 1) % queueSize;
         vector_done.push_back(queueArray[new_front]);
         num --;
     }

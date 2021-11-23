@@ -22,7 +22,6 @@ void printMenu(){
 	printf("Press 1 to create an INTEGER Queue\n");
 	printf("Press 2 to create a FLOAT Queue\n");
 	printf("Press 3 to create a STRING Queue\n");
-	printf("Press anything else to Exit this Program :)\n");
 	printf("Press ENTER after you've made your selection\n");
 }
 
@@ -37,9 +36,9 @@ void printQueueMenu(){
 	printf("Welcome to the Queue Testing Menu!\n");
 	printf("\n");
 	printf("Please select from the folowing menu as our menu options have changed:\n");
-	printf("Press 1 to add to the Queue\n");
-	printf("Press 2 to remove from the Queue\n");
-	printf("Press 3 to display the Queue's current contents\n");
+	printf("Press 1 to Add to the Queue\n");
+	printf("Press 2 to Remove from the Queue\n");
+	printf("Press 3 to Display the Queue's current contents\n");
 	printf("Press 4 to Clear the Queue\n");
   printf("Press 5 to Exit this Program :)\n");
 	printf("Press ENTER after you've made your selection\n");
@@ -48,19 +47,9 @@ void printQueueMenu(){
 int main() {
   int menuNumber = 0;
 	printMenu();
-	scanf("%d", &menuNumber); //Scanf is used to accept user input to determine menu 
-	// if (menuNumber == 1) {
-	// 	// Queue<int> q(10);
-	// 	Queue<int> intq(10);
-	// } else if (menuNumber == 2) {
-	// 	// Queue<float> q(10);
-	// 	Queue<float> floatq(10);
-	// } else if (menuNumber == 3) {
-	// 	// Queue<string> q(10);
-	// 	Queue<string> stringq(10);
-	// } else 
-	// 	return 0;
-	Queue<int> intq(10);
+	scanf("%d", &menuNumber); //Variable to keep track of which datatype to use for Queues
+	
+	Queue<int> intq(10);		//Initialize Queues for ints, floats, and strings
 	Queue<float> floatq(10);
 	Queue<string> stringq(10);
 
@@ -70,22 +59,22 @@ int main() {
 	while(queueMenuNumber != 5){
 		//Switch Statement to Correspond to User Input
 		switch(queueMenuNumber){
-			case 1: 																											//INTEGER QUEUE
+			case 1: 																	//ENQUEUE
 				printf("Enter the item to Add:");
 				switch (menuNumber){
-					case 1:
+					case 1:																//Enqueue for integer queue
 						int numberToAdd;
 						scanf("%d", &numberToAdd);
 						intq.enqueue(numberToAdd);
 						break;
 
-        	case 2:
+        	case 2:																//Enqueue for float queue
 						float floatToAdd;
 						scanf("%f", &floatToAdd);
 						floatq.enqueue(floatToAdd);
 						break;
 
-        	case 3:
+        	case 3:																//Enqueue for string queue
 						string stringToAdd;
 						cin >> stringToAdd;
 						stringq.enqueue(stringToAdd);
@@ -93,8 +82,8 @@ int main() {
         }
 				break;
 
-			case 2: 																											//FLOAT QUEUE
-				printf("Removing first Item from the Queue:");
+			case 2: 																	//DEQUEUE
+				printf("Removing first Item from the Queue:\n");
 				switch (menuNumber){
 					case 1:{
 						int numberRemoved = 0;
@@ -116,11 +105,10 @@ int main() {
 						printf("Item removed: %s", stringRemoved);
 						break;
 					}
-
         }
 				break;
 
-			case 3:																													//STRING QUEUE
+			case 3:																		//DISPLAY QUEUE
 				printf("Displaying the Queue:\n");
 				switch (menuNumber){
 					case 1:{
@@ -152,16 +140,35 @@ int main() {
 						printf("\n");
 						break;
 					}
-
 				}
 				break;
 
 
-			case 4:
-				return 0;
+			case 4:																		//CLEAR QUEUE
+				printf("Clearing the Queue:\n");
+				switch (menuNumber){
+					case 1:{
+						intq.clear();
+						printf("\n");
+						break;
+					}
+
+					case 2:{
+						floatq.clear();
+						printf("\n");
+						break;
+					}
+
+					case 3:{
+						stringq.clear();
+						printf("\n");
+						break;
+					}
+				}
+				break;
 		}
 			printQueueMenu();
-			scanf("%d", &queueMenuNumber); //Scanf is used to accept 
+			scanf("%d", &queueMenuNumber); 
 	}
   return 0;
 }  // end main
