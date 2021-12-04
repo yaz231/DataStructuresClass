@@ -1,5 +1,4 @@
-/** Interface for the ADT binary tree. 
- @file BinaryTreeInterface.h */ 
+/** Interface for the ADT binary tree. @file BinaryTreeInterface.h */ 
 #ifndef _BINARY_TREE_INTERFACE 
 #define _BINARY_TREE_INTERFACE 
 
