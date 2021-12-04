@@ -1,5 +1,5 @@
-// #ifndef _EMPLOYEE_NODE 
-// #define _EMPLOYEE_NODE 
+#ifndef _EMPLOYEE_NODE 
+#define _EMPLOYEE_NODE 
 #include <string>
 using namespace std;
 
@@ -11,8 +11,8 @@ class EmployeeNode {
     EmployeeNode* rightChildPtr; // Pointer to right child 
   public: 
     EmployeeNode(); 
-    EmployeeNode(const string employeeName, const int employeeID); 
-    EmployeeNode(const string employeeName, const int employeeID, EmployeeNode* leftPtr, EmployeeNode* rightPtr); 
+    EmployeeNode(const int employeeID, const string employeeName); 
+    EmployeeNode(const int employeeID, const string employeeName, EmployeeNode* leftPtr, EmployeeNode* rightPtr); 
     void setName(const string employeeName); 
     void setID(const int employeeID); 
     int getID() const; 

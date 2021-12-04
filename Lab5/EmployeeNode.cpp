@@ -1,5 +1,6 @@
-#include <string>
 #include "EmployeeNode.h" //Header File
+#include <string>
+
 using namespace std;
 
 EmployeeNode::EmployeeNode(){
@@ -9,14 +10,14 @@ EmployeeNode::EmployeeNode(){
     rightChildPtr = nullptr;
 }
 
-EmployeeNode::EmployeeNode(const string employeeName, const int employeeID){
+EmployeeNode::EmployeeNode(const int employeeID, const string employeeName){
     myEmployeeID = employeeID;
     myEmployeeName = employeeName;
     leftChildPtr = nullptr;
     rightChildPtr = nullptr;
 }
 
-EmployeeNode::EmployeeNode(const string employeeName, const int employeeID, EmployeeNode* leftPtr, EmployeeNode* rightPtr){
+EmployeeNode::EmployeeNode(const int employeeID, const string employeeName,  EmployeeNode* leftPtr, EmployeeNode* rightPtr){
     myEmployeeID = employeeID;
     myEmployeeName = employeeName;
     leftChildPtr = leftPtr;
