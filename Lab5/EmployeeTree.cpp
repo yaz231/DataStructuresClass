@@ -38,64 +38,101 @@ void EmployeeTree::addSorted(int id, string name){
   }
 }
 
-bool EmployeeTree::remove(int id){
-  bool success = false;
-  headPtr = removeValue(headPtr, id, success);
-  return success;
+// bool EmployeeTree::remove(int id){
+//   bool success = false;
+//   headPtr = removeValue(headPtr, id, success);
+//   return success;
+// }
+
+// EmployeeNode* EmployeeTree::removeValue(EmployeeNode* rootPtr, int id, bool& success){ 
+//   if (rootPtr == nullptr) {
+//     success = false;
+//     return nullptr;
+//   } else if (rootPtr->getID() == id){ 
+//     // Item is in the root of some subtree 
+//     rootPtr = removeNode(rootPtr); // Remove the item 
+//     success = true;
+//     return rootPtr;
+//   } else if (rootPtr->getID() > id) { 
+//     // Search the left subtree 
+//     EmployeeNode* tempPtr = removeValue(rootPtr->getLeftChildPtr(), id, success);
+//     rootPtr->setLeftChildPtr(tempPtr);
+//     return rootPtr;
+//   } else {
+//     // Search the right subtree 
+//     EmployeeNode* tempPtr = removeValue(rootPtr->getRightChildPtr(), id, success); 
+//     rootPtr->setRightChildPtr(tempPtr); 
+//     return rootPtr;
+//   }
+//  }
+
+// EmployeeNode* EmployeeTree::removeLeftMostNode(EmployeeNode* rootPtr, int& inorderSuccesssor){ 
+//   if (rootPtr->getLeftChildPtr() == nullptr){
+//     inorderSuccesssor = rootPtr->getID(); 
+//     return removeNode(rootPtr);
+//   } else
+//     return removeLeftMostNode(rootPtr->getLeftChildPtr(), inorderSuccesssor);
+// }
+
+// EmployeeNode* EmployeeTree::removeNode(EmployeeNode* rootPtr){
+//   if (rootPtr->isLeaf()) {
+//     delete rootPtr;
+//     rootPtr = nullptr;
+//     return rootPtr;
+//   } else if (hasOneChild(rootPtr)){
+//     EmployeeNode* nodeToConnectPtr;
+//     if (rootPtr->getLeftChildPtr() != nullptr)
+//       nodeToConnectPtr = rootPtr->getLeftChildPtr();
+//     else 
+//       nodeToConnectPtr = rootPtr->getRightChildPtr(); 
+//     delete rootPtr;
+//     rootPtr = nullptr;
+//     return nodeToConnectPtr;
+//   } else {
+//       // int newNodeValue = rootPtr->getRightChildPtr()->getID();
+//       int newNodeValue;
+//       EmployeeNode* tempPtr = removeLeftMostNode(rootPtr->getRightChildPtr(), newNodeValue);
+//       rootPtr->setRightChildPtr(tempPtr);
+//       rootPtr->setID(newNodeValue);
+//       return rootPtr;
+//   }
+// }
+
+EmployeeNode* EmployeeTree::remove(EmployeeNode* rootPtr, int id){
+  if (rootPtr == nullptr) return rootPtr;
+  else if(id < rootPtr->getID()) 
+    rootPtr->setLeftChildPtr(remove(rootPtr->getLeftChildPtr(), id));
+  else if(id > rootPtr->getID())
+    rootPtr->setRightChildPtr(remove(rootPtr->getRightChildPtr(), id));
+  else {
+    //Case 1: No Child
+    if (rootPtr->getLeftChildPtr() == nullptr && rootPtr->getRightChildPtr() == nullptr){
+      delete rootPtr;
+      rootPtr = nullptr;
+    } else if (rootPtr->getLeftChildPtr() == nullptr){//One Child
+      EmployeeNode* tempPtr = rootPtr;
+      rootPtr = rootPtr->getRightChildPtr();
+      delete tempPtr;
+    } else if (rootPtr->getRightChildPtr() == nullptr){//One Child
+      EmployeeNode* tempPtr = rootPtr;
+      rootPtr = rootPtr->getLeftChildPtr();
+      delete tempPtr;
+    } else {//2 Children
+      EmployeeNode* tempPtr = findMin(rootPtr->getRightChildPtr());
+      rootPtr->setID(tempPtr->getID());
+      rootPtr->setName(tempPtr->getName());
+      rootPtr->setRightChildPtr(remove(rootPtr->getRightChildPtr(), tempPtr->getID()));
+    }
+  }
+  return rootPtr;
 }
 
-EmployeeNode* EmployeeTree::removeValue(EmployeeNode* rootPtr, int id, bool& success){ 
-  if (rootPtr == nullptr) {
-    success = false;
-    return nullptr;
-  } else if (rootPtr->getID() == id){ 
-    // Item is in the root of some subtree 
-    rootPtr = removeNode(rootPtr); // Remove the item 
-    success = true;
-    return rootPtr;
-  } else if (rootPtr->getID() > id) { 
-    // Search the left subtree 
-    EmployeeNode* tempPtr = removeValue(rootPtr->getLeftChildPtr(), id, success);
-    rootPtr->setLeftChildPtr(tempPtr);
-    return rootPtr;
-  } else {
-    // Search the right subtree 
-    EmployeeNode* tempPtr = removeValue(rootPtr->getRightChildPtr(), id, success); 
-    rootPtr->setRightChildPtr(tempPtr); 
-    return rootPtr;
+EmployeeNode* EmployeeTree::findMin(EmployeeNode* rootPtr){
+  EmployeeNode* currPtr = rootPtr;
+  while (currPtr->getLeftChildPtr() != nullptr){
+    currPtr = currPtr->getLeftChildPtr();
   }
- }
-
-EmployeeNode* EmployeeTree::removeLeftMostNode(EmployeeNode* rootPtr, int& inorderSuccesssor){ 
-  if (rootPtr->getLeftChildPtr() == nullptr){
-    inorderSuccesssor = rootPtr->getID(); 
-    return removeNode(rootPtr);
-  } else
-    return removeLeftMostNode(rootPtr->getLeftChildPtr(), inorderSuccesssor);
-}
-
-EmployeeNode* EmployeeTree::removeNode(EmployeeNode* rootPtr){
-  if (rootPtr->isLeaf()) {
-    delete rootPtr;
-    rootPtr = nullptr;
-    return rootPtr;
-  } else if (hasOneChild(rootPtr)){
-    EmployeeNode* nodeToConnectPtr;
-    if (rootPtr->getLeftChildPtr() != nullptr)
-      nodeToConnectPtr = rootPtr->getLeftChildPtr();
-    else 
-      nodeToConnectPtr = rootPtr->getRightChildPtr(); 
-    delete rootPtr;
-    rootPtr = nullptr;
-    return nodeToConnectPtr;
-  } else {
-      // int newNodeValue = rootPtr->getRightChildPtr()->getID();
-      int newNodeValue;
-      EmployeeNode* tempPtr = removeLeftMostNode(rootPtr->getRightChildPtr(), newNodeValue);
-      rootPtr->setRightChildPtr(tempPtr);
-      rootPtr->setID(newNodeValue);
-      return rootPtr;
-  }
+  return currPtr;
 }
 
 bool EmployeeTree::hasOneChild(EmployeeNode* rootPtr){

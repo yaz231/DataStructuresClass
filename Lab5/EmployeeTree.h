@@ -8,15 +8,17 @@
 class EmployeeTree { 
   private:
     EmployeeNode* headPtr;
-    EmployeeNode* removeValue(EmployeeNode* rootPtr, int id, bool& success);
-    EmployeeNode* removeNode(EmployeeNode* rootPtr);
-    EmployeeNode* removeLeftMostNode(EmployeeNode* rootPtr, int& inorderSuccesssor);
+    // EmployeeNode* removeValue(EmployeeNode* rootPtr, int id, bool& success);
+    // EmployeeNode* removeNode(EmployeeNode* rootPtr);
+    // EmployeeNode* removeLeftMostNode(EmployeeNode* rootPtr, int& inorderSuccesssor);
     bool contains_helper(EmployeeNode* rootPtr, int id);
 
   public:
     EmployeeTree();
     void addSorted(int id, string name);
-    bool remove(int id);
+    // bool remove(int id);
+    EmployeeNode* remove(EmployeeNode* rootPtr, int id);
+    EmployeeNode* findMin(EmployeeNode* rootPtr);
     bool hasOneChild(EmployeeNode* rootPtr);
     void printInorder(EmployeeNode* rootPtr);
     EmployeeNode* getRoot();
