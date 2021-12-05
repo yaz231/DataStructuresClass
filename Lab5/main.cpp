@@ -23,9 +23,11 @@ void printMenu(){
     printf("Press 3 to Display the Employee Binary Tree\n");
     printf("Press 4 to Remove an Employee from the Employee Binary Tree\n");
     printf("Press 5 to Exit the Program\n");
+    printf("\n");
+    printf("NOTE: DISPLAYING WORKS BEST WITH 1 or 2 digit ID's and only displays the ID's of the employee!\n");
 	printf("Press ENTER after you've made your selection\n");
     printf("\n");
-    printf("NOTE: DISPLAYING WORKS BEST WITH 1 or 2 digit ID's and only displays the ID's of the employee!");
+
 }
 
 
@@ -34,8 +36,7 @@ int main(){
     string fileName = "employees.txt";
     string nameToAdd;
     int menuNumber;
-    string line;
-    int id;
+    string line, name, id;
     ifstream file_reader(fileName);
 	printMenu();
 	scanf("%d", &menuNumber); 
@@ -52,7 +53,6 @@ int main(){
                 }
                 printf("File successfully opened!\n");
                 int i;
-                string line, name, id;
                 printf("READING\n");
                 while(getline(file_reader, line)){
                     stringstream ss(line);
