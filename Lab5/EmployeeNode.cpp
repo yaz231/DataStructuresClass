@@ -17,7 +17,7 @@ EmployeeNode::EmployeeNode(const int employeeID, const string employeeName){
     rightChildPtr = nullptr;
 }
 
-EmployeeNode::EmployeeNode(const int employeeID, const string employeeName,  EmployeeNode* leftPtr, EmployeeNode* rightPtr){
+EmployeeNode::EmployeeNode(const int employeeID, const string employeeName, EmployeeNode* leftPtr, EmployeeNode* rightPtr){
     myEmployeeID = employeeID;
     myEmployeeName = employeeName;
     leftChildPtr = leftPtr;
