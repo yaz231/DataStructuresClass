@@ -8,21 +8,18 @@
 class EmployeeTree { 
   private:
     EmployeeNode* headPtr;
-    // EmployeeNode* removeValue(EmployeeNode* rootPtr, int id, bool& success);
-    // EmployeeNode* removeNode(EmployeeNode* rootPtr);
-    // EmployeeNode* removeLeftMostNode(EmployeeNode* rootPtr, int& inorderSuccesssor);
-    bool contains_helper(EmployeeNode* rootPtr, int id);
+    // bool contains_helper(EmployeeNode* rootPtr, int id);
 
   public:
     EmployeeTree();
     void addSorted(int id, string name);
-    // bool remove(int id);
     EmployeeNode* remove(EmployeeNode* rootPtr, int id);
     EmployeeNode* findMin(EmployeeNode* rootPtr);
     bool hasOneChild(EmployeeNode* rootPtr);
     void printInorder(EmployeeNode* rootPtr);
     EmployeeNode* getRoot();
-    void contains(int id);
+    // void contains(int id);
+    bool contains(EmployeeNode* rootPtr, int id);
     int getHeight(EmployeeNode* rootPtr);
     void printLevelOrder(EmployeeNode* rootPtr, int depth);
     string printLevel(EmployeeNode* rootPtr, int level, string gap);

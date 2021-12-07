@@ -11,6 +11,7 @@ EmployeeTree::EmployeeTree(){
   headPtr = nullptr;
 }
 
+//Function to add New Employee to the Binary Tree
 void EmployeeTree::addSorted(int id, string name){
   if (headPtr == nullptr){
     headPtr = new EmployeeNode(id, name);
@@ -38,66 +39,7 @@ void EmployeeTree::addSorted(int id, string name){
   }
 }
 
-// bool EmployeeTree::remove(int id){
-//   bool success = false;
-//   headPtr = removeValue(headPtr, id, success);
-//   return success;
-// }
-
-// EmployeeNode* EmployeeTree::removeValue(EmployeeNode* rootPtr, int id, bool& success){ 
-//   if (rootPtr == nullptr) {
-//     success = false;
-//     return nullptr;
-//   } else if (rootPtr->getID() == id){ 
-//     // Item is in the root of some subtree 
-//     rootPtr = removeNode(rootPtr); // Remove the item 
-//     success = true;
-//     return rootPtr;
-//   } else if (rootPtr->getID() > id) { 
-//     // Search the left subtree 
-//     EmployeeNode* tempPtr = removeValue(rootPtr->getLeftChildPtr(), id, success);
-//     rootPtr->setLeftChildPtr(tempPtr);
-//     return rootPtr;
-//   } else {
-//     // Search the right subtree 
-//     EmployeeNode* tempPtr = removeValue(rootPtr->getRightChildPtr(), id, success); 
-//     rootPtr->setRightChildPtr(tempPtr); 
-//     return rootPtr;
-//   }
-//  }
-
-// EmployeeNode* EmployeeTree::removeLeftMostNode(EmployeeNode* rootPtr, int& inorderSuccesssor){ 
-//   if (rootPtr->getLeftChildPtr() == nullptr){
-//     inorderSuccesssor = rootPtr->getID(); 
-//     return removeNode(rootPtr);
-//   } else
-//     return removeLeftMostNode(rootPtr->getLeftChildPtr(), inorderSuccesssor);
-// }
-
-// EmployeeNode* EmployeeTree::removeNode(EmployeeNode* rootPtr){
-//   if (rootPtr->isLeaf()) {
-//     delete rootPtr;
-//     rootPtr = nullptr;
-//     return rootPtr;
-//   } else if (hasOneChild(rootPtr)){
-//     EmployeeNode* nodeToConnectPtr;
-//     if (rootPtr->getLeftChildPtr() != nullptr)
-//       nodeToConnectPtr = rootPtr->getLeftChildPtr();
-//     else 
-//       nodeToConnectPtr = rootPtr->getRightChildPtr(); 
-//     delete rootPtr;
-//     rootPtr = nullptr;
-//     return nodeToConnectPtr;
-//   } else {
-//       // int newNodeValue = rootPtr->getRightChildPtr()->getID();
-//       int newNodeValue;
-//       EmployeeNode* tempPtr = removeLeftMostNode(rootPtr->getRightChildPtr(), newNodeValue);
-//       rootPtr->setRightChildPtr(tempPtr);
-//       rootPtr->setID(newNodeValue);
-//       return rootPtr;
-//   }
-// }
-
+//Function to Remove Nodes from the SubTree
 EmployeeNode* EmployeeTree::remove(EmployeeNode* rootPtr, int id){
   if (rootPtr == nullptr) return rootPtr;
   else if(id < rootPtr->getID()) 
@@ -105,7 +47,7 @@ EmployeeNode* EmployeeTree::remove(EmployeeNode* rootPtr, int id){
   else if(id > rootPtr->getID())
     rootPtr->setRightChildPtr(remove(rootPtr->getRightChildPtr(), id));
   else {
-    //Case 1: No Child
+                                                      //Case 1: No Child
     if (rootPtr->getLeftChildPtr() == nullptr && rootPtr->getRightChildPtr() == nullptr){
       delete rootPtr;
       rootPtr = nullptr;
@@ -117,7 +59,7 @@ EmployeeNode* EmployeeTree::remove(EmployeeNode* rootPtr, int id){
       EmployeeNode* tempPtr = rootPtr;
       rootPtr = rootPtr->getLeftChildPtr();
       delete tempPtr;
-    } else {//2 Children
+    } else {                                           //2 Children
       EmployeeNode* tempPtr = findMin(rootPtr->getRightChildPtr());
       rootPtr->setID(tempPtr->getID());
       rootPtr->setName(tempPtr->getName());
@@ -127,6 +69,7 @@ EmployeeNode* EmployeeTree::remove(EmployeeNode* rootPtr, int id){
   return rootPtr;
 }
 
+//Auxilary Function to Find the minimum element in a subtree.
 EmployeeNode* EmployeeTree::findMin(EmployeeNode* rootPtr){
   EmployeeNode* currPtr = rootPtr;
   while (currPtr->getLeftChildPtr() != nullptr){
@@ -135,6 +78,7 @@ EmployeeNode* EmployeeTree::findMin(EmployeeNode* rootPtr){
   return currPtr;
 }
 
+//Function to Check if Node has Only 1 child.
 bool EmployeeTree::hasOneChild(EmployeeNode* rootPtr){
   if ((rootPtr->getRightChildPtr() == nullptr) != (rootPtr->getLeftChildPtr() == nullptr)){
     return true;
@@ -142,6 +86,7 @@ bool EmployeeTree::hasOneChild(EmployeeNode* rootPtr){
     return false;
 }
 
+//Function to print ID's in Binary Tree in order
 void EmployeeTree::printInorder(EmployeeNode* rootPtr){
     if (rootPtr == NULL)
         return;
@@ -152,19 +97,21 @@ void EmployeeTree::printInorder(EmployeeNode* rootPtr){
     }
 }
 
+//Function to return the Root of the Tree
 EmployeeNode* EmployeeTree::getRoot(){
   return headPtr;
 }
 
-void EmployeeTree::contains(int id){
-  if (contains_helper(headPtr, id)){
-    printf("ID:%d FOUND\n", id);
-  } else {
-    printf("ID:%d NOT FOUND\n", id);
-  }
-}
+// void EmployeeTree::contains(int id){
+//   if (contains_helper(headPtr, id)){
+//     printf("ID:%d FOUND\n", id);
+//   } else {
+//     printf("ID:%d NOT FOUND\n", id);
+//   }
+// }
 
-bool EmployeeTree::contains_helper(EmployeeNode* rootPtr, int id){
+//Function to return whether or not id was found in the Binary Tree
+bool EmployeeTree::contains(EmployeeNode* rootPtr, int id){
   EmployeeNode* currPtr = rootPtr;
 
   if(currPtr->getID() == id){
@@ -172,11 +119,15 @@ bool EmployeeTree::contains_helper(EmployeeNode* rootPtr, int id){
   } else if (currPtr == nullptr){
     return false;
   } else {
-    currPtr = (id < currPtr->getID()) ? (currPtr->getLeftChildPtr()) : (currPtr->getRightChildPtr());
-    return contains_helper(currPtr, id);
+    //if the ID of the node is less than the current node, recursively search the left subtree, otherwise recursively search the right subtree
+    // currPtr = (id < currPtr->getID()) ? (currPtr->getLeftChildPtr()) : (currPtr->getRightChildPtr());
+    // return contains(currPtr, id);
+    return contains(currPtr->getLeftChildPtr(), id) || contains(currPtr->getRightChildPtr(), id);
   }
 }
 
+//Auxilary Function used for Displaying the Binary Tree
+//Finds the Height of the Binary Tree
 int EmployeeTree::getHeight(EmployeeNode* rootPtr){
   if (rootPtr == nullptr){
     return 0;
@@ -192,6 +143,7 @@ int EmployeeTree::getHeight(EmployeeNode* rootPtr){
   }
 }
 
+//Function that prints every Line of the Binary Tree
 void EmployeeTree::printLevelOrder(EmployeeNode* rootPtr, int depth){
   for(int i = 1; i <= depth; i++) {
     string gap="";
@@ -204,8 +156,9 @@ void EmployeeTree::printLevelOrder(EmployeeNode* rootPtr, int depth){
   }
 }
 
+//Function that recursively searches and generates strings for print function above
 string EmployeeTree::printLevel(EmployeeNode* rootPtr, int level, string gap){
-  if (level==1) {
+  if (level == 1) {
     if (rootPtr == 0) {
      return gap + "-" + gap;
     }
