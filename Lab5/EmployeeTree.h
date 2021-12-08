@@ -18,7 +18,6 @@ class EmployeeTree {
     bool hasOneChild(EmployeeNode* rootPtr);
     void printInorder(EmployeeNode* rootPtr);
     EmployeeNode* getRoot();
-    // void contains(int id);
     bool contains(EmployeeNode* rootPtr, int id);
     int getHeight(EmployeeNode* rootPtr);
     void printLevelOrder(EmployeeNode* rootPtr, int depth);

@@ -102,27 +102,19 @@ EmployeeNode* EmployeeTree::getRoot(){
   return headPtr;
 }
 
-// void EmployeeTree::contains(int id){
-//   if (contains_helper(headPtr, id)){
-//     printf("ID:%d FOUND\n", id);
-//   } else {
-//     printf("ID:%d NOT FOUND\n", id);
-//   }
-// }
-
 //Function to return whether or not id was found in the Binary Tree
 bool EmployeeTree::contains(EmployeeNode* rootPtr, int id){
   EmployeeNode* currPtr = rootPtr;
 
   if(currPtr->getID() == id){
     return true;
-  } else if (currPtr == nullptr){
+  } else if (currPtr->getLeftChildPtr() == nullptr & currPtr->getRightChildPtr() == nullptr){
     return false;
   } else {
     //if the ID of the node is less than the current node, recursively search the left subtree, otherwise recursively search the right subtree
-    // currPtr = (id < currPtr->getID()) ? (currPtr->getLeftChildPtr()) : (currPtr->getRightChildPtr());
-    // return contains(currPtr, id);
-    return contains(currPtr->getLeftChildPtr(), id) || contains(currPtr->getRightChildPtr(), id);
+    currPtr = (id < currPtr->getID()) ? (currPtr->getLeftChildPtr()) : (currPtr->getRightChildPtr());
+    return contains(currPtr, id);
+    // return contains(currPtr->getLeftChildPtr(), id) || contains(currPtr->getRightChildPtr(), id);
   }
 }
 
